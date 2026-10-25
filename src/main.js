@@ -34,3 +34,31 @@ console.log(calculateDiscount(1200, true)); // 120
 console.log(calculateDiscount(800, true)); // 40
 console.log(calculateDiscount(1200, false)); // 0
 console.log(calculateDiscount(0, true)); // 0
+
+/* Task 3 */
+/* Створіть функцію getDeliveryPrice(deliveryType). За допомогою switch поверніть вартість обраного способу доставки:
+"pickup" — 0;
+"standard" — 80;
+"express" — 150;
+будь-яке інше значення — -1.
+
+Значення -1 означає, що спосіб доставки не знайдено.
+ */
+/* Code */
+function getDeliveryPrice(deliveryType) {
+  switch (deliveryType) {
+    case 'pickup':
+      return 0;
+    case 'standard':
+      return 80;
+    case 'express':
+      return 150;
+    default:
+      return -1;
+  }
+}
+
+console.log(getDeliveryPrice('pickup')); // 0
+console.log(getDeliveryPrice('standard')); // 80
+console.log(getDeliveryPrice('express')); // 150
+console.log(getDeliveryPrice('drone')); // -1
