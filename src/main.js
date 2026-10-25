@@ -68,15 +68,66 @@ console.log(getDeliveryPrice('drone')); // -1
 */
 
 function showPackingProgress(quantity) {
-    if (quantity <= 0) {
-        console.log("Немає товарів для пакування");
-        return;
-    }
-        for (let i = 1; i <= quantity; i++) {
-        console.log(`Пакуємо товар ${i} з ${quantity}`);
+  if (quantity <= 0) {
+    console.log('Немає товарів для пакування');
+    return;
+  }
+  for (let i = 1; i <= quantity; i++) {
+    console.log(`Пакуємо товар ${i} з ${quantity}`);
   }
 }
 
 showPackingProgress(3);
 showPackingProgress(1);
 showPackingProgress(0);
+
+// Етап 5 — Підсумок замовлення
+
+// Створіть функцію createOrderSummary(productName, price, quantity, isPremium, deliveryType). Вона повинна використати функції з попередніх етапів і повернути підсумковий рядок.
+
+// Послідовність роботи:
+
+// Отримайте вартість товарів через calculateSubtotal.
+// Якщо вартість дорівнює 0, поверніть Замовлення неможливо оформити.
+// Отримайте суму знижки через calculateDiscount.
+// Отримайте вартість доставки через getDeliveryPrice.
+// Якщо доставка повернула -1, поверніть Невідомий спосіб доставки.
+// Обчисліть фінальну суму: вартість товарів мінус знижка плюс доставка.
+// Викличте showPackingProgress(quantity).
+// Поверніть рядок за шаблоном: Товар: Навушники. Кількість: 4. До сплати: 980 грн.
+
+function createOrderSummary(
+  productName,
+  price,
+  quantity,
+  isPremium,
+  deliveryType
+) {
+  const subtotal = calculateSubtotal(price, quantity);
+  if (subtotal === 0) {
+    return 'Замовлення неможливо оформити';
+  }
+
+  const discount = calculateDiscount(subtotal, isPremium);
+
+  const delivery = getDeliveryPrice(deliveryType);
+  if (delivery === -1) {
+    return 'Невідомий спосіб доставки';
+  }
+  const total = subtotal - discount + delivery;
+  showPackingProgress(quantity);
+
+  return `Товар: ${productName}. Кількість: ${quantity}. До сплати: ${total} грн.`;
+}
+
+console.log(createOrderSummary('Навушники', 250, 4, true, 'standard'));
+// Товар: Навушники. Кількість: 4. До сплати: 980 грн.
+
+console.log(createOrderSummary('Клавіатура', 800, 1, true, 'pickup'));
+// Товар: Клавіатура. Кількість: 1. До сплати: 760 грн.
+
+console.log(createOrderSummary('Миша', 500, 0, false, 'express'));
+// Замовлення неможливо оформити
+
+console.log(createOrderSummary('Монітор', 5000, 1, false, 'drone'));
+// Невідомий спосіб доставки
