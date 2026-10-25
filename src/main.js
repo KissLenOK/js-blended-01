@@ -62,3 +62,21 @@ console.log(getDeliveryPrice('pickup')); // 0
 console.log(getDeliveryPrice('standard')); // 80
 console.log(getDeliveryPrice('express')); // 150
 console.log(getDeliveryPrice('drone')); // -1
+
+/*Етап 4 — Процес пакування
+Створіть функцію showPackingProgress(quantity), яка за допомогою циклу for послідовно виводить у консоль повідомлення для кожної одиниці товару.
+*/
+
+function showPackingProgress(quantity) {
+    if (quantity <= 0) {
+        console.log("Немає товарів для пакування");
+        return;
+    }
+        for (let i = 1; i <= quantity; i++) {
+        console.log(`Пакуємо товар ${i} з ${quantity}`);
+  }
+}
+
+showPackingProgress(3);
+showPackingProgress(1);
+showPackingProgress(0);
